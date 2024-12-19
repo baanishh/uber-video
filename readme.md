@@ -109,3 +109,69 @@ The request body must be a JSON object containing the following fields:
   }
 }
 ```
+
+## /users/profile
+
+### Description
+This endpoint retrieves the profile information of the authenticated user.
+
+### Method
+GET
+
+### Headers
+- `Authorization`: Bearer token (required)
+
+### Response
+
+#### Success (200)
+- **Status Code**: 200 OK
+- **Response Body**: A JSON object containing the user's profile information.
+
+#### Error (401)
+- **Status Code**: 401 Unauthorized
+- **Response Body**: A JSON object containing:
+  - `message`: An error message indicating invalid or missing token.
+
+### Example Response
+```json
+{
+  "user": {
+    "_id": "user_id",
+    "fullname": {
+      "firstname": "John",
+      "lastname": "Doe"
+    },
+    "email": "john.doe@example.com"
+  }
+}
+```
+
+## /users/logout
+
+### Description
+This endpoint logs out the currently authenticated user by invalidating their token.
+
+### Method
+POST
+
+### Headers
+- `Authorization`: Bearer token (required)
+
+### Response
+
+#### Success (200)
+- **Status Code**: 200 OK
+- **Response Body**: A JSON object containing:
+  - `message`: Confirmation of successful logout.
+
+#### Error (401)
+- **Status Code**: 401 Unauthorized
+- **Response Body**: A JSON object containing:
+  - `message`: An error message indicating invalid or missing token.
+
+### Example Response
+```json
+{
+  "message": "Logged out successfully"
+}
+```
