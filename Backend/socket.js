@@ -10,7 +10,7 @@ const initializeSocket = (server) => {
         cors: {
             origin: ["http://localhost:5173","https://h2ss09vb-5173.inc1.devtunnels.ms"],// Your frontend URL
             methods: ["GET", "POST"],
-            // credentials: true
+            credentials: true
         }
     });
     //handle connection
