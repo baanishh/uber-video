@@ -197,7 +197,7 @@ socket.on("ride-started",ride=>{
   //create ride function
  const createRide = async () => {
   try {
-      const response = await axios.post(`${BASE_URL}/rides/create`, {
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/rides/create`, {
           pickup,
           destination,
           vehicleType
@@ -215,8 +215,6 @@ socket.on("ride-started",ride=>{
   }
 };
 
-
-console.log("window",window.gomaps);
 
   
 
@@ -239,8 +237,8 @@ console.log("window",window.gomaps);
           <i className="ri-arrow-down-wide-line"></i>
           </h5>
           <h4 className='text-2xl font-semibold'>Find a trip</h4>
-          <form onSubmit={submitHandler}>
-            <div className='line h-16 w-1 bg-gray-700 absolute top-[45%] left-10 rounded-full'></div>
+          <form onSubmit={submitHandler} className='relative'>
+            <div className='line h-16 w-1 bg-gray-700 absolute top-[20%] left-5 rounded-full'></div>
           <input 
           onClick={() => {
             setOpenPanel(true);

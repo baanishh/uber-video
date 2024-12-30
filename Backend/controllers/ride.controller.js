@@ -16,7 +16,7 @@ module.exports.createRide=async(req,res)=>{
         try {
         const ride = await rideService.createRide({user:req.user._id, pickup, destination, vehicleType});
         res.status(201).json(ride);
-        // console.log("ride",ride);
+        console.log("ride",ride);
         
 
         //getting pickup coordinates
@@ -25,7 +25,7 @@ module.exports.createRide=async(req,res)=>{
         
         //find nearby captain
         const captainInRadius=await mapService.getCaptainsInTheRadius(pickupCoordinates.ltd, pickupCoordinates.lng, 2)// here we passing coord to find nearby captains
-        console.log("avCap",captainInRadius);
+        // console.log("avCap",captainInRadius);
          
         //sending ride details to client side of captain
         ride.otp=""

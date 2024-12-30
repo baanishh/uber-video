@@ -1,8 +1,8 @@
 const mongoose=require('mongoose')
 const jwt=require('jsonwebtoken')
-const bcrypt=require('bcrypt')
+const bcrypt=require('bcryptjs')
 
-const userSchema=new mongoose.mongoose.Schema({
+const userSchema=new mongoose.Schema({
     fullname: {
         firstname: {
             type:String,
@@ -30,8 +30,8 @@ const userSchema=new mongoose.mongoose.Schema({
 })
 
 
-userSchema.methods.generateAuthToken=function(){
-    const token = jwt.sign({ _id: this._id }, process.env.JWT_SECRET, { expiresIn: '24h' })
+userSchema.methods.generateAuthToken= function(){
+    const token = jwt.sign({ _id: this._id }, process.env.JWT_SECRET,{ expiresIn: '24h' })
     return token;
 }
 
