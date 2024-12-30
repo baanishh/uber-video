@@ -45,6 +45,7 @@ const CaptainSignup = () => {
       if(response.status===201){
         const data=await response.data
         setCaptain(data.captain)
+        localStorage.setItem('token', data.token)
         console.log(captain);
         navigate('/captain-home')
       }
@@ -153,7 +154,7 @@ const CaptainSignup = () => {
     <p className='text-center'>Already have an account? <Link to="/captain-login" className='text-blue-600'>Login here</Link> </p>
     </div>
     <div>
-    <p className='text-[10px] leading-tight'>
+    <p className='text-[10px] leading-tight mt-6'>
       By proceeding, I agree to Uber's <a href="#" className='underline'>Terms of Use</a> and acknowledge that I have read the <a href="#" className='underline'>Privacy Policy</a>.
     </p>
     </div>

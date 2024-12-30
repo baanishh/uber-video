@@ -20,7 +20,7 @@ const CaptainLogin = () => {
       const response=await axios.post(`${import.meta.env.VITE_BASE_URL}/captains/login`,captain)
       if(response.status===200){
         const data=response.data
-        setCaptain(data.captain)
+        setCaptain(data)
         localStorage.setItem('token', data.token)
         navigate('/captain-home')
       }

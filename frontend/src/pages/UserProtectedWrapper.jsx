@@ -16,11 +16,11 @@ const UserProtectedWrapper = ({children}) => {
         }
 
          // api calling
-         axios.get(`${import.meta.env.VITE_BASE_URL}/captains/profile`,{
+         axios.get(`${import.meta.env.VITE_BASE_URL}/users/profile`,{
           headers:{
               Authorization:`Bearer ${token}`
           }}).then((response)=>{
-              setUser(response.data.captain)
+              setUser(response.data)
               setIsLoading(false)
           }).catch((error)=>{
               console.log(error);
