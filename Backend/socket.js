@@ -8,7 +8,7 @@ let io;
 const initializeSocket = (server) => {
     io = socketIO(server, {
         cors: {
-            origin: ["http://localhost:5173","https://uber-riding-seven.vercel.app"],// Your frontend URL
+            origin: "https://uber-riding-seven.vercel.app",// Your frontend URL
             methods: ["GET", "POST"],
             credentials: true
         }
