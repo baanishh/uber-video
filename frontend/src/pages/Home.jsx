@@ -6,10 +6,9 @@ import LocationSearchPannel from '../components/LocationSearchPannel';
 import VehiclePanel from '../components/VehiclePanel';
 import ConfirmRide from '../components/ConfirmRide';
 import LookingForDriver from '../components/LookingForDriver';
-import WaitingForDriver from '../components/WaitingforDriver';
+import WaitingForDriver from '../components/WaitingForDriver';
 import { getSuggestions, getFareEstimate } from '../services/api';
 import axios from 'axios';
-import {BASE_URL} from '../services/api'
 import {SocketContext} from '../context/SocketContext'
 import {UserDataContext} from '../context/UserContext'
 import { useNavigate } from 'react-router-dom';
