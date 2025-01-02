@@ -13,7 +13,6 @@ connectToDb()
 
 const app=express()
 app.use(cors({
-    // origin: ['https://uber-riding-seven.vercel.app','http://localhost:5173' ],// Replace with your frontend's origin
     origin:"https://uber-riding-seven.vercel.app",
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
     credentials: true, // If you're sending cookies or auth headers
