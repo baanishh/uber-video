@@ -3,7 +3,7 @@ import { io } from 'socket.io-client';
 
 export const SocketContext = createContext();
 
-const socket = io(`https://uber-ride-c8xq.onrender.com`, {
+const socket = io(`${import.meta.env.VITE_BASE_URL}`, {
     autoConnect: true,
     reconnection: true
 });
