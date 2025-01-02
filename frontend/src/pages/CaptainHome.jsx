@@ -1,5 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import CaptainDetails from '../components/CaptainDetails'
 import RidePopUp from '../components/RidePopUp'
 import { useGSAP } from '@gsap/react'
@@ -11,6 +13,7 @@ import axios from 'axios'
 import LiveTracking from '../components/LiveTracking'
 
 
+
 const CaptainHome = () => {
 
   const ridePopUpPanelRef = useRef(null)
@@ -19,6 +22,7 @@ const CaptainHome = () => {
   const [ridePopUpPanel, setRidePopUpPanel] = useState(false)
   const [confirmRidePopUpPanel, setConfirmRidePopUpPanel] = useState(false)
   const [ride, setRide] = useState(null)
+  
   
 
   const {socket}=useContext(SocketContext)
@@ -51,6 +55,7 @@ const CaptainHome = () => {
 
   },[])
 
+
   //getting new ride info
   socket.on('new-ride',(data)=>{
     console.log("new ride",data);
@@ -58,6 +63,7 @@ const CaptainHome = () => {
     setRidePopUpPanel(true)
   })
   console.log("ride state",ride);
+
 
   // ride popup panel animation
   useGSAP(function(){
@@ -85,6 +91,7 @@ const CaptainHome = () => {
     }
    },[confirmRidePopUpPanel])
 
+  
 
   //  confirm ride function || accept ride
    async function conformRide(){
@@ -124,7 +131,7 @@ const CaptainHome = () => {
       </div>
 
       {/* popup notification */}
-      <div ref={ridePopUpPanelRef} className='fixed w-full z-10 bottom-0 py-10 px-3 bg-white translate-y-full pt-12'>
+      <div ref={ridePopUpPanelRef} className='fixed w-full z-20 bottom-0 py-10 px-3 bg-white translate-y-full pt-12'>
         <RidePopUp 
         ride={ride}
         setRidePopUpPanel={setRidePopUpPanel}
@@ -134,12 +141,15 @@ const CaptainHome = () => {
       </div>
     
       {/* confirm popup panel */}
-      <div ref={confirmRidePopUpPanelRef} className='fixed w-full z-10 bottom-0 py-10 px-3 bg-white translate-y-full pt-12 h-screen'>
+      <div ref={confirmRidePopUpPanelRef} className='fixed w-full z-20 bottom-0 py-10 px-3 bg-white translate-y-full pt-12 h-screen'>
         <ConfirmRidePopUp 
         ride={ride}
         setConfirmRidePopUpPanel={setConfirmRidePopUpPanel} 
-        setRidePopUpPanel={setRidePopUpPanel}/>
+        setRidePopUpPanel={setRidePopUpPanel}
+        />
       </div>
+          
+      
     </div>
   )
 }

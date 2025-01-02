@@ -1,19 +1,38 @@
-import React, { useRef, useState } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import CaptainDetails from '../components/CaptainDetails'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import FinishRide from '../components/FinishRide'
 import LiveTracking from '../components/LiveTracking'
+import {SocketContext} from '../context/SocketContext'
+import PaymentDoneModal from '../components/PaymentDoneModal'
 
-const CaptainRiding = () => {
+const CaptainRiding = (props) => {
+  
+  const paymentPopupModalRef = useRef(null)
+  const [paymentPanel, setPaymentPanel] = useState(false)
+  const [paymentDetails, setPaymentDetails] = useState(null)
 
+  console.log(paymentPanel);
+  
 const [finishRidePanel, setFinishRidePanel] = useState(false)
 const finishRidePanelRef = useRef(null)
+
+const { socket } = useContext(SocketContext);
 
 // taking data passed through ( useNavigate ) from captainHome
 const location=useLocation()
 const rideData=location.state?.ride
+
+
+  // payment details
+  socket.on('payment-done', (data) => {
+    console.log("Razor pay", data);
+    setPaymentDetails(data)
+    setPaymentPanel(true);
+  });
+  console.log("payee",paymentDetails);
+  
 
 // finish ride panel animation
   useGSAP(function(){
@@ -27,6 +46,23 @@ const rideData=location.state?.ride
      })
     }
    },[finishRidePanel])
+
+// payment done modal panel animation
+useGSAP(function(){
+  if(paymentPanel){
+    gsap.to(paymentPopupModalRef.current, {
+      opacity: 1,
+      visibility: 'visible',
+      pointerEvents: 'auto'
+    })
+  } else {
+    gsap.to(paymentPopupModalRef.current, {
+      opacity: 0,
+      visibility: 'hidden',
+      pointerEvents: 'none'
+    })
+  }
+},[paymentPanel])
 
   return (
     <div className="h-screen relative">
@@ -66,6 +102,15 @@ const rideData=location.state?.ride
        rideData={rideData}
        setFinishRidePanel={setFinishRidePanel}/>
       </div>
+
+      {/* payment modal */}
+      <div ref={paymentPopupModalRef} >
+        <PaymentDoneModal 
+        setPaymentPanel={setPaymentPanel}
+        paymentDetails={paymentDetails}
+        />
+      </div>
+
      
     </div>
   )

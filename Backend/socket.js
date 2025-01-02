@@ -9,6 +9,7 @@ const initializeSocket = (server) => {
     io = socketIO(server, {
         cors: {
             origin: "https://uber-riding-seven.vercel.app",// Your frontend URL
+            // origin:"http://localhost:5173",
             methods: ["GET", "POST"],
             credentials: true
         }
@@ -32,7 +33,7 @@ const initializeSocket = (server) => {
         //to get captain current live location when in HOME PAGE
         socket.on('update-location-captain', async (data) => {
             const { userId, location } = data;
-                console.log('Location update from captain:', { userId, location });
+                // console.log('Location update from captain:', { userId, location });
                 
             if (!location || !location.ltd || !location.lng) {
                 return socket.emit('error', { message: 'Invalid location data' });

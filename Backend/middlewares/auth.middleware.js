@@ -8,7 +8,7 @@ const captainModel = require("../models/captain.model");
 module.exports.authUser = async (req, res, next) => {
   const authHeader = req.headers.authorization 
   const token = req.cookies.token || (authHeader && authHeader.split(" ")[1]);
-  console.log("headerss",token);
+  
   
   
   if (!token) {
@@ -25,7 +25,7 @@ module.exports.authUser = async (req, res, next) => {
     console.log('decoded',decoded._id);
     
     const user = await userModel.findById(decoded._id);
-    console.log("userrrr",user);
+
     
     req.user = user;
     return next();
